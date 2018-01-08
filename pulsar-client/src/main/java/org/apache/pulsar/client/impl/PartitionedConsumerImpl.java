@@ -233,7 +233,8 @@ public class PartitionedConsumerImpl extends ConsumerBase {
     }
 
     @Override
-    protected CompletableFuture<Void> doAcknowledge(MessageId messageId, AckType ackType) {
+    protected CompletableFuture<Void> doAcknowledge(MessageId messageId, AckType ackType,
+                                                    Map<String,Long> properties) {
         checkArgument(messageId instanceof MessageIdImpl);
 
         if (getState() != State.Ready) {
@@ -246,7 +247,7 @@ public class PartitionedConsumerImpl extends ConsumerBase {
         } else {
 
             ConsumerImpl consumer = consumers.get(((MessageIdImpl) messageId).getPartitionIndex());
-            return consumer.doAcknowledge(messageId, ackType).thenRun(() ->
+            return consumer.doAcknowledge(messageId, ackType, properties).thenRun(() ->
                     unAckedMessageTracker.remove((MessageIdImpl) messageId));
         }
 
