@@ -191,7 +191,7 @@ public class PulsarClientImpl implements PulsarClient {
     }
 
     @Override
-    public Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfig<byte[]> conf) throws PulsarClientException {
+    public Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfiguration conf) throws PulsarClientException {
         return subscribe(topic, subscription, conf, conf != null ? conf.getMessageListener() : null);
     }
 
@@ -201,7 +201,7 @@ public class PulsarClientImpl implements PulsarClient {
     }
 
     @Override
-    public Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfig<byte[]> conf, MessageListener listener)
+    public Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfiguration conf, MessageListener listener)
             throws PulsarClientException {
         try {
             return subscribeAsync(topic, subscription, conf, listener).get();
@@ -224,7 +224,7 @@ public class PulsarClientImpl implements PulsarClient {
     }
 
     @Override
-    public CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfig<byte[]> conf) {
+    public CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfiguration conf) {
         return subscribeAsync(topic, subscription, conf, conf != null ? conf.getMessageListener() : null);
     }
 
@@ -235,7 +235,7 @@ public class PulsarClientImpl implements PulsarClient {
 
     @Override
     public CompletableFuture<Consumer<byte[]>> subscribeAsync(final String topic, final String subscription,
-            final ConsumerConfig<byte[]> conf, MessageListener listener) {
+                                                              final ConsumerConfiguration conf, MessageListener listener) {
         if (state.get() != State.Open) {
             return FutureUtil.failedFuture(new PulsarClientException.AlreadyClosedException("Client already closed"));
         }
@@ -458,21 +458,16 @@ public class PulsarClientImpl implements PulsarClient {
     }
 
     @Override
-    public <T> Consumer<T> subscribe(String topic, String subscription, ConsumerConfig<T> conf, Schema<T> codec) throws PulsarClientException {
-        TypedConsumerConfigAdapter<T> adapted = new TypedConsumerConfigAdapter(conf, codec);
-        TypedConsumerImpl<T> typedConsumer = new TypedConsumerImpl<>(subscribe(topic, subscription, adapted), codec);
-        adapted.setTypedConsumer(typedConsumer);
+    public <T> Consumer<T> subscribe(String topic, String subscription, ConsumerConfiguration conf, Schema<T> codec) throws PulsarClientException {
+        TypedConsumerImpl<T> typedConsumer = new TypedConsumerImpl<>(subscribe(topic, subscription, conf), codec);
         return typedConsumer;
     }
 
     @Override
-    public <T> CompletableFuture<Consumer<T>> subscribeAsync(String topic, String subscription, ConsumerConfig<T> conf, Schema<T> codec) {
-        final TypedConsumerConfigAdapter<T> adapted = new TypedConsumerConfigAdapter<>(conf, codec);
-        return subscribeAsync(topic, subscription, adapted).thenApply((consumer) -> {
-            TypedConsumerImpl<T> typedConsumer = new TypedConsumerImpl<>(consumer, codec);
-            adapted.setTypedConsumer(typedConsumer);
-            return typedConsumer;
-        });
+    public <T> CompletableFuture<Consumer<T>> subscribeAsync(String topic, String subscription, ConsumerConfiguration conf, Schema<T> codec) {
+        return subscribeAsync(topic, subscription, conf).thenApply((consumer) ->
+                new TypedConsumerImpl<>(consumer, codec)
+        );
     }
 
     @Override

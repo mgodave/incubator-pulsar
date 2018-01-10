@@ -35,14 +35,7 @@ import java.util.function.Function;
 
 import org.apache.pulsar.client.admin.PulsarAdmin;
 import org.apache.pulsar.client.admin.PulsarAdminException;
-import org.apache.pulsar.client.api.ClientConfiguration;
-import org.apache.pulsar.client.api.Consumer;
-import org.apache.pulsar.client.api.ConsumerConfiguration;
-import org.apache.pulsar.client.api.MessageId;
-import org.apache.pulsar.client.api.MessageListener;
-import org.apache.pulsar.client.api.Producer;
-import org.apache.pulsar.client.api.ProducerConfiguration;
-import org.apache.pulsar.client.api.PulsarClient;
+import org.apache.pulsar.client.api.*;
 import org.apache.pulsar.client.impl.PulsarClientImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +84,7 @@ public class LoadSimulationClient {
     // consumption as well as size may be changed at
     // any time, and the TradeUnit may also be stopped.
     private static class TradeUnit {
-        Future<Consumer> consumerFuture;
+        Future<Consumer<byte[]>> consumerFuture;
         final AtomicBoolean stop;
         final RateLimiter rateLimiter;
 

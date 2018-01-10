@@ -32,7 +32,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  *
  */
-public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
+public class ConsumerConfiguration {
 
     /**
      * Resend shouldn't be requested before minAckTimeoutMillis.
@@ -43,7 +43,7 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
 
     private SubscriptionType subscriptionType = SubscriptionType.Exclusive;
 
-    private MessageListener<T> messageListener;
+    private MessageListener<byte[]> messageListener;
 
     private int receiverQueueSize = 1000;
 
@@ -61,7 +61,6 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
     /**
      * @return the configured timeout in milliseconds for unacked messages.
      */
-    @Override
     public long getAckTimeoutMillis() {
         return ackTimeoutMillis;
     }
@@ -76,7 +75,7 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      *            unit in which the timeout is provided.
      * @return {@link ConsumerConfiguration}
      */
-    public ConsumerConfiguration<T> setAckTimeout(long ackTimeout, TimeUnit timeUnit) {
+    public ConsumerConfiguration setAckTimeout(long ackTimeout, TimeUnit timeUnit) {
         long ackTimeoutMillis = timeUnit.toMillis(ackTimeout);
         checkArgument(ackTimeoutMillis >= minAckTimeoutMillis,
                 "Ack timeout should be should be greater than " + minAckTimeoutMillis + " ms");
@@ -87,8 +86,7 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
     /**
      * @return the configured subscription type
      */
-    @Override
-    public SubscriptionType getSubscriptionType() {
+        public SubscriptionType getSubscriptionType() {
         return this.subscriptionType;
     }
 
@@ -100,7 +98,7 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      * @param subscriptionType
      *            the subscription type value
      */
-    public ConsumerConfiguration<T> setSubscriptionType(SubscriptionType subscriptionType) {
+    public ConsumerConfiguration setSubscriptionType(SubscriptionType subscriptionType) {
         checkNotNull(subscriptionType);
         this.subscriptionType = subscriptionType;
         return this;
@@ -112,9 +110,8 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      *
      * @return the configured {@link MessageListener} for the consumer
      */
-    @Override
     @Deprecated
-    public MessageListener getMessageListener() {
+    public MessageListener<byte[]> getMessageListener() {
         return this.messageListener;
     }
 
@@ -131,7 +128,7 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      *            the listener object
      */
     @Deprecated
-    public ConsumerConfiguration setMessageListener(MessageListener messageListener) {
+    public ConsumerConfiguration setMessageListener(MessageListener<byte[]> messageListener) {
         checkNotNull(messageListener);
         this.messageListener = messageListener;
         return this;
@@ -140,16 +137,14 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
     /**
      * @return the configure receiver queue size value
      */
-    @Override
-    public int getReceiverQueueSize() {
+        public int getReceiverQueueSize() {
         return this.receiverQueueSize;
     }
 
     /**
      * @return the CryptoKeyReader
      */
-    @Override
-    public CryptoKeyReader getCryptoKeyReader() {
+        public CryptoKeyReader getCryptoKeyReader() {
         return this.cryptoKeyReader;
     }
 
@@ -177,7 +172,6 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
     /**
      * @return The ConsumerCryptoFailureAction
      */
-    @Override
     public ConsumerCryptoFailureAction getCryptoFailureAction() {
         return this.cryptoFailureAction;
     }
@@ -208,7 +202,7 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      * @param receiverQueueSize
      *            the new receiver queue size value
      */
-    public ConsumerConfiguration<T> setReceiverQueueSize(int receiverQueueSize) {
+    public ConsumerConfiguration setReceiverQueueSize(int receiverQueueSize) {
         checkArgument(receiverQueueSize >= 0, "Receiver queue size cannot be negative");
         this.receiverQueueSize = receiverQueueSize;
         return this;
@@ -217,7 +211,6 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
     /**
      * @return the consumer name
      */
-    @Override
     public String getConsumerName() {
         return consumerName;
     }
@@ -227,13 +220,12 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      *
      * @param consumerName
      */
-    public ConsumerConfiguration<T> setConsumerName(String consumerName) {
+    public ConsumerConfiguration setConsumerName(String consumerName) {
         checkArgument(consumerName != null && !consumerName.equals(""));
         this.consumerName = consumerName;
         return this;
     }
     
-    @Override
     public int getPriorityLevel() {
         return priorityLevel;
     }

@@ -109,14 +109,14 @@ public class ConsumerImpl extends ConsumerBase {
         NonDurable
     }
 
-    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
+    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfiguration conf,
             ExecutorService listenerExecutor, int partitionIndex, CompletableFuture<Consumer<byte[]>> subscribeFuture,
                  MessageListener listener) {
         this(client, topic, subscription, conf, listenerExecutor, partitionIndex, subscribeFuture,
                 SubscriptionMode.Durable, null, listener);
     }
 
-    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
+    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfiguration conf,
             ExecutorService listenerExecutor, int partitionIndex, CompletableFuture<Consumer<byte[]>> subscribeFuture,
             SubscriptionMode subscriptionMode, MessageId startMessageId, MessageListener listener) {
         super(client, topic, subscription, conf, conf.getReceiverQueueSize(), listenerExecutor, subscribeFuture, listener);

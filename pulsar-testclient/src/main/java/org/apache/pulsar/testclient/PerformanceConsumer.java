@@ -18,8 +18,6 @@
  */
 package org.apache.pulsar.testclient;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -36,15 +34,7 @@ import java.util.concurrent.atomic.LongAdder;
 
 import org.HdrHistogram.Histogram;
 import org.HdrHistogram.Recorder;
-import org.apache.pulsar.client.api.ClientConfiguration;
-import org.apache.pulsar.client.api.Consumer;
-import org.apache.pulsar.client.api.ConsumerConfiguration;
-import org.apache.pulsar.client.api.CryptoKeyReader;
-import org.apache.pulsar.client.api.EncryptionKeyInfo;
-import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.MessageListener;
-import org.apache.pulsar.client.api.PulsarClient;
-import org.apache.pulsar.client.api.SubscriptionType;
+import org.apache.pulsar.client.api.*;
 import org.apache.pulsar.client.impl.PulsarClientImpl;
 import org.apache.pulsar.common.naming.DestinationName;
 import org.slf4j.Logger;
@@ -246,7 +236,7 @@ public class PerformanceConsumer {
                 return null;
             }
         }
-        List<Future<Consumer>> futures = Lists.newArrayList();
+        List<Future<Consumer<byte[]>>> futures = Lists.newArrayList();
         ConsumerConfiguration consumerConfig = new ConsumerConfiguration();
         consumerConfig.setMessageListener(listener);
         consumerConfig.setReceiverQueueSize(arguments.receiverQueueSize);
@@ -275,7 +265,7 @@ public class PerformanceConsumer {
             }
         }
 
-        for (Future<Consumer> future : futures) {
+        for (Future<Consumer<byte[]>> future : futures) {
             future.get();
         }
 

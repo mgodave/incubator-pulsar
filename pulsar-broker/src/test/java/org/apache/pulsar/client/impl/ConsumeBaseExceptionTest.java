@@ -18,11 +18,7 @@
  */
 package org.apache.pulsar.client.impl;
 
-import org.apache.pulsar.client.api.Consumer;
-import org.apache.pulsar.client.api.ConsumerConfiguration;
-import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.ProducerConsumerBase;
-import org.apache.pulsar.client.api.PulsarClientException;
+import org.apache.pulsar.client.api.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -64,7 +60,7 @@ public class ConsumeBaseExceptionTest extends ProducerConsumerBase {
     public void testListener() throws PulsarClientException {
         Consumer consumer = null;
         ConsumerConfiguration conf = new ConsumerConfiguration();
-        conf.setMessageListener((Consumer c, Message msg) -> {
+        conf.setMessageListener((Consumer<byte[]> c, Message<byte[]> msg) -> {
         });
         consumer = pulsarClient.subscribe("persistent://prop/cluster/ns/topicName", "my-subscription", conf);
         Assert.assertTrue(consumer.receiveAsync().isCompletedExceptionally());

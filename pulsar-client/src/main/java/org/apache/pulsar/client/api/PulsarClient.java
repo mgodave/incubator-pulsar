@@ -221,7 +221,7 @@ public interface PulsarClient extends Closeable {
      * @throws PulsarClientException
      * @throws InterruptedException
      */
-    Consumer<byte[]> subscribe(String topic, String subscription, MessageListener listener) throws PulsarClientException;
+    Consumer<byte[]> subscribe(String topic, String subscription, MessageListener<byte[]> listener) throws PulsarClientException;
 
     /**
      * Asynchronously subscribe to the given topic and subscription combination using default
@@ -250,7 +250,7 @@ public interface PulsarClient extends Closeable {
      *            A listener that will be called in order for every message received
      * @return Future of the {@code Consumer} object
      */
-    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, MessageListener listener);
+    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, MessageListener<byte[]> listener);
 
     /**
      * Subscribe to the given topic and subscription combination with given {@code ConsumerConfiguration}
@@ -264,7 +264,7 @@ public interface PulsarClient extends Closeable {
      * @return The {@code Consumer} object
      * @throws PulsarClientException
      */
-    Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfig<byte[]> conf) throws PulsarClientException;
+    Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfiguration conf) throws PulsarClientException;
 
     /**
      * Subscribe to the given topic and subscription combination with given {@code ConsumerConfiguration}
@@ -280,7 +280,7 @@ public interface PulsarClient extends Closeable {
      * @return The {@code Consumer} object
      * @throws PulsarClientException
      */
-    <T> Consumer<T> subscribe(String topic, String subscription, ConsumerConfig<T> conf, Schema<T> schema) throws PulsarClientException;
+    <T> Consumer<T> subscribe(String topic, String subscription, ConsumerConfiguration conf, Schema<T> schema) throws PulsarClientException;
 
     /**
      * Subscribe to the given topic and subscription combination with given {@code ConsumerConfiguration}
@@ -296,7 +296,7 @@ public interface PulsarClient extends Closeable {
      * @return The {@code Consumer} object
      * @throws PulsarClientException
      */
-    Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfig<byte[]> conf, MessageListener listener) throws PulsarClientException;
+    Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfiguration conf, MessageListener listener) throws PulsarClientException;
 
     /**
      * Asynchronously subscribe to the given topic and subscription combination using given
@@ -310,7 +310,7 @@ public interface PulsarClient extends Closeable {
      *            The {@code ConsumerConfiguration} object
      * @return Future of the {@code Consumer} object
      */
-    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfig<byte[]> conf);
+    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfiguration conf);
 
     /**
      * Asynchronously subscribe to the given topic and subscription combination using given
@@ -326,7 +326,7 @@ public interface PulsarClient extends Closeable {
      *            A schema used to validate objects as well as serialize/deserialize
      * @return Future of the {@code Consumer} object
      */
-    <T> CompletableFuture<Consumer<T>> subscribeAsync(String topic, String subscription, ConsumerConfig<T> conf, Schema<T> schema);
+    <T> CompletableFuture<Consumer<T>> subscribeAsync(String topic, String subscription, ConsumerConfiguration conf, Schema<T> schema);
 
     /**
      * Asynchronously subscribe to the given topic and subscription combination using given
@@ -342,7 +342,7 @@ public interface PulsarClient extends Closeable {
      *            A listener that will be called in order for every message received
      * @return Future of the {@code Consumer} object
      */
-    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfig<byte[]> conf, MessageListener listener);
+    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfiguration conf, MessageListener listener);
 
     /**
      * Create a topic reader with given {@code ReaderConfiguration} for reading messages from the specified topic.

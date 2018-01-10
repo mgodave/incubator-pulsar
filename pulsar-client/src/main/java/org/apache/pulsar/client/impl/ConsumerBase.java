@@ -44,7 +44,7 @@ public abstract class ConsumerBase extends HandlerBase implements Consumer<byte[
     }
 
     protected final String subscription;
-    protected final ConsumerConfig conf;
+    protected final ConsumerConfiguration conf;
     protected final String consumerName;
     protected final CompletableFuture<Consumer<byte[]>> subscribeFuture;
     protected final MessageListener listener;
@@ -54,7 +54,7 @@ public abstract class ConsumerBase extends HandlerBase implements Consumer<byte[
     protected final int maxReceiverQueueSize;
 
 
-    protected ConsumerBase(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
+    protected ConsumerBase(PulsarClientImpl client, String topic, String subscription, ConsumerConfiguration conf,
             int receiverQueueSize, ExecutorService listenerExecutor, CompletableFuture<Consumer<byte[]>> subscribeFuture,
             MessageListener listener) {
         super(client, topic, new Backoff(100, TimeUnit.MILLISECONDS, 60, TimeUnit.SECONDS, 0 , TimeUnit.MILLISECONDS));

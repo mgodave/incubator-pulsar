@@ -34,14 +34,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.pulsar.client.admin.PulsarAdminException;
-import org.apache.pulsar.client.api.Consumer;
-import org.apache.pulsar.client.api.ConsumerConfiguration;
-import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.MessageId;
-import org.apache.pulsar.client.api.Producer;
-import org.apache.pulsar.client.api.ProducerConfiguration;
-import org.apache.pulsar.client.api.PulsarClientException;
-import org.apache.pulsar.client.api.SubscriptionType;
 import org.apache.pulsar.client.impl.ConsumerStats;
 import org.apache.pulsar.client.impl.ProducerStats;
 import org.slf4j.Logger;
@@ -344,7 +336,7 @@ public class SimpleProducerConsumerStatTest extends ProducerConsumerBase {
         String topicName = "persistent://my-property/cluster/my-ns/testBatchMessagesRateOut";
         double produceRate = 17;
         int batchSize = 5;
-        ConsumerConfiguration<byte[]> consumerConf = new ConsumerConfiguration<>();
+        ConsumerConfiguration consumerConf = new ConsumerConfiguration();
         consumerConf.setSubscriptionType(SubscriptionType.Exclusive);
         Consumer<byte[]> consumer = pulsarClient.subscribe(topicName, "my-subscriber-name", consumerConf);
         ProducerConfiguration producerConf = new ProducerConfiguration();

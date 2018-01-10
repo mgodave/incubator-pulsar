@@ -55,7 +55,7 @@ public class PartitionedConsumerImpl extends ConsumerBase {
     private final ConsumerStats stats;
     private final UnAckedMessageTracker unAckedMessageTracker;
 
-    PartitionedConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
+    PartitionedConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfiguration conf,
         int numPartitions, ExecutorService listenerExecutor, CompletableFuture<Consumer<byte[]>> subscribeFuture,
         MessageListener listener) {
         super(client, topic, subscription, conf, Math.max(Math.max(2, numPartitions), conf.getReceiverQueueSize()), listenerExecutor,

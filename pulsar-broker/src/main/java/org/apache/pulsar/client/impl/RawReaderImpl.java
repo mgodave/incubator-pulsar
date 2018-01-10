@@ -45,7 +45,7 @@ public class RawReaderImpl implements RawReader {
     private final PulsarClientImpl client;
     private final String topic;
     private final String subscription;
-    private final ConsumerConfiguration<byte[]> consumerConfiguration;
+    private final ConsumerConfiguration consumerConfiguration;
     private RawConsumerImpl consumer;
 
     public RawReaderImpl(PulsarClientImpl client, String topic, String subscription,
@@ -54,7 +54,7 @@ public class RawReaderImpl implements RawReader {
         this.subscription = subscription;
         this.topic = topic;
 
-        consumerConfiguration = new ConsumerConfiguration<>();
+        consumerConfiguration = new ConsumerConfiguration();
         consumerConfiguration.setSubscriptionType(SubscriptionType.Exclusive);
         consumerConfiguration.setReceiverQueueSize(DEFAULT_RECEIVER_QUEUE_SIZE);
 

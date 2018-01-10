@@ -45,14 +45,7 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.record.TimestampType;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.pulsar.client.api.ClientConfiguration;
-import org.apache.pulsar.client.api.ConsumerConfiguration;
-import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.MessageId;
-import org.apache.pulsar.client.api.MessageListener;
-import org.apache.pulsar.client.api.PulsarClient;
-import org.apache.pulsar.client.api.PulsarClientException;
-import org.apache.pulsar.client.api.SubscriptionType;
+import org.apache.pulsar.client.api.*;
 import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.apache.pulsar.client.impl.PulsarClientImpl;
 import org.apache.pulsar.client.kafka.compat.MessageIdUtils;
@@ -200,7 +193,7 @@ public class PulsarKafkaConsumer<K, V> implements Consumer<K, V>, MessageListene
                 // acknowledgeCumulative()
                 int numberOfPartitions = ((PulsarClientImpl) client).getNumberOfPartitions(topic).get();
 
-                ConsumerConfiguration<byte[]> conf = new ConsumerConfiguration<>();
+                ConsumerConfiguration conf = new ConsumerConfiguration();
                 conf.setSubscriptionType(SubscriptionType.Failover);
                 conf.setMessageListener(this);
                 if (numberOfPartitions > 1) {

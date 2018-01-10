@@ -40,14 +40,6 @@ import org.apache.pulsar.broker.namespace.NamespaceService;
 import org.apache.pulsar.broker.service.BrokerService;
 import org.apache.pulsar.broker.service.persistent.PersistentDispatcherMultipleConsumers;
 import org.apache.pulsar.broker.service.persistent.PersistentTopic;
-import org.apache.pulsar.client.api.Consumer;
-import org.apache.pulsar.client.api.ConsumerConfiguration;
-import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.api.MessageId;
-import org.apache.pulsar.client.api.Producer;
-import org.apache.pulsar.client.api.ProducerConfiguration;
-import org.apache.pulsar.client.api.PulsarClientException;
-import org.apache.pulsar.client.api.SubscriptionType;
 import org.apache.pulsar.client.impl.ConsumerImpl;
 import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.apache.pulsar.common.policies.data.SubscriptionStats;
@@ -109,7 +101,7 @@ public class DispatcherBlockConsumerTest extends ProducerConsumerBase {
             final String subscriberName = "subscriber-1";
 
             pulsar.getConfiguration().setMaxUnackedMessagesPerSubscription(unackMsgAllowed);
-            ConsumerConfiguration<byte[]> conf = new ConsumerConfiguration<>();
+            ConsumerConfiguration conf = new ConsumerConfiguration();
             conf.setReceiverQueueSize(receiverQueueSize);
             conf.setSubscriptionType(SubscriptionType.Shared);
             Consumer<byte[]> consumer1 = pulsarClient.subscribe(topicName, subscriberName, conf);

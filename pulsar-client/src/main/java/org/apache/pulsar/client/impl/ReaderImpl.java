@@ -39,7 +39,7 @@ public class ReaderImpl implements Reader<byte[]> {
 
         String subscription = "reader-" + DigestUtils.sha1Hex(UUID.randomUUID().toString()).substring(0, 10);
 
-        ConsumerConfiguration<byte[]> consumerConfiguration = new ConsumerConfiguration<>();
+        ConsumerConfiguration consumerConfiguration = new ConsumerConfiguration();
         consumerConfiguration.setSubscriptionType(SubscriptionType.Exclusive);
         consumerConfiguration.setReceiverQueueSize(readerConfiguration.getReceiverQueueSize());
         if (readerConfiguration.getReaderName() != null) {
