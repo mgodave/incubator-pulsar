@@ -107,14 +107,21 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
     }
 
     /**
+     * @deprecated Use a suitable {@link PulsarClient} subscribe method and provide a {@link MessageListener}, ex:
+     * {@link PulsarClient#subscribe(String, String, MessageListener)}
+     *
      * @return the configured {@link MessageListener} for the consumer
      */
     @Override
-    public MessageListener<T> getMessageListener() {
+    @Deprecated
+    public MessageListener getMessageListener() {
         return this.messageListener;
     }
 
     /**
+     * @deprecated Use a suitable {@link PulsarClient} subscribe method and provide a {@link MessageListener}, ex:
+     * {@link PulsarClient#subscribe(String, String, MessageListener)}
+     *
      * Sets a {@link MessageListener} for the consumer
      * <p>
      * When a {@link MessageListener} is set, application will receive messages through it. Calls to
@@ -123,7 +130,8 @@ public class ConsumerConfiguration<T> implements ConsumerConfig<T> {
      * @param messageListener
      *            the listener object
      */
-    public ConsumerConfiguration<T> setMessageListener(MessageListener<T> messageListener) {
+    @Deprecated
+    public ConsumerConfiguration setMessageListener(MessageListener messageListener) {
         checkNotNull(messageListener);
         this.messageListener = messageListener;
         return this;

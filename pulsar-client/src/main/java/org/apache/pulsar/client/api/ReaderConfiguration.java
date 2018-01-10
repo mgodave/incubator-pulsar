@@ -33,14 +33,21 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
     private ConsumerCryptoFailureAction cryptoFailureAction = ConsumerCryptoFailureAction.FAIL;
 
     /**
+     * @deprecated Use {@link PulsarClient#createReader(String, MessageId, ReaderConfiguration, ReaderListener)} or
+     * {@link PulsarClient#createReaderAsync(String, MessageId, ReaderConfiguration, ReaderListener)} to add a listener.
+     *
      * @return the configured {@link ReaderListener} for the reader
      */
     @Override
-    public ReaderListener<T> getReaderListener() {
+    @Deprecated
+    public ReaderListener getReaderListener() {
         return this.readerListener;
     }
 
     /**
+     * @deprecated Use {@link PulsarClient#createReader(String, MessageId, ReaderConfiguration, ReaderListener)} or
+     * {@link PulsarClient#createReaderAsync(String, MessageId, ReaderConfiguration, ReaderListener)} to add a listener.
+     *
      * Sets a {@link ReaderListener} for the reader
      * <p>
      * When a {@link ReaderListener} is set, application will receive messages through it. Calls to
@@ -49,7 +56,8 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
      * @param readerListener
      *            the listener object
      */
-    public ReaderConfiguration<T> setReaderListener(ReaderListener<T> readerListener) {
+    @Deprecated
+    public ReaderConfiguration setReaderListener(ReaderListener readerListener) {
         checkNotNull(readerListener);
         this.readerListener = readerListener;
         return this;

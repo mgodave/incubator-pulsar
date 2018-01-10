@@ -33,8 +33,9 @@ public class ReaderImpl implements Reader<byte[]> {
     private final ConsumerImpl consumer;
 
     public ReaderImpl(PulsarClientImpl client, String topic, MessageId startMessageId,
+
         ReaderConfig<byte[]> readerConfiguration, ExecutorService listenerExecutor,
-        CompletableFuture<Consumer<byte[]>> consumerFuture) {
+        CompletableFuture<Consumer<byte[]>> consumerFuture, ReaderListener readerListener) {
 
         String subscription = "reader-" + DigestUtils.sha1Hex(UUID.randomUUID().toString()).substring(0, 10);
 
@@ -46,7 +47,6 @@ public class ReaderImpl implements Reader<byte[]> {
         }
 
         if (readerConfiguration.getReaderListener() != null) {
-            ReaderListener<byte[]> readerListener = readerConfiguration.getReaderListener();
             consumerConfiguration.setMessageListener(new MessageListener<byte[]>() {
                 private static final long serialVersionUID = 1L;
 
@@ -69,7 +69,7 @@ public class ReaderImpl implements Reader<byte[]> {
         }
 
         consumer = new ConsumerImpl(client, topic, subscription, consumerConfiguration, listenerExecutor, -1,
-                consumerFuture, SubscriptionMode.NonDurable, startMessageId);
+                consumerFuture, SubscriptionMode.NonDurable, startMessageId, consumerConfiguration.getMessageListener());
     }
 
     @Override

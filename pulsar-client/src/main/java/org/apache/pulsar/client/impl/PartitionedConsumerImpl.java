@@ -18,20 +18,7 @@
  */
 package org.apache.pulsar.client.impl;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.stream.Collectors;
-
+import com.google.common.collect.Lists;
 import org.apache.pulsar.client.api.*;
 import org.apache.pulsar.client.util.FutureUtil;
 import org.apache.pulsar.common.api.proto.PulsarApi.CommandAck.AckType;
@@ -39,7 +26,17 @@ import org.apache.pulsar.common.naming.DestinationName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class PartitionedConsumerImpl extends ConsumerBase {
 
@@ -59,9 +56,10 @@ public class PartitionedConsumerImpl extends ConsumerBase {
     private final UnAckedMessageTracker unAckedMessageTracker;
 
     PartitionedConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
-            int numPartitions, ExecutorService listenerExecutor, CompletableFuture<Consumer<byte[]>> subscribeFuture) {
+        int numPartitions, ExecutorService listenerExecutor, CompletableFuture<Consumer<byte[]>> subscribeFuture,
+        MessageListener listener) {
         super(client, topic, subscription, conf, Math.max(Math.max(2, numPartitions), conf.getReceiverQueueSize()), listenerExecutor,
-                subscribeFuture);
+                subscribeFuture, listener);
         this.consumers = Lists.newArrayListWithCapacity(numPartitions);
         this.pausedConsumers = new ConcurrentLinkedQueue<>();
         this.sharedQueueResumeThreshold = maxReceiverQueueSize / 2;
@@ -86,7 +84,8 @@ public class PartitionedConsumerImpl extends ConsumerBase {
         for (int partitionIndex = 0; partitionIndex < numPartitions; partitionIndex++) {
             String partitionName = DestinationName.get(topic).getPartition(partitionIndex).toString();
             ConsumerImpl consumer = new ConsumerImpl(client, partitionName, subscription, internalConfig,
-                    client.externalExecutorProvider().getExecutor(), partitionIndex, new CompletableFuture<>());
+                    client.externalExecutorProvider().getExecutor(), partitionIndex, new CompletableFuture<>(),
+                    internalConfig.getMessageListener());
             consumers.add(consumer);
             consumer.subscribeFuture().handle((cons, subscribeException) -> {
                 if (subscribeException != null) {

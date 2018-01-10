@@ -109,16 +109,17 @@ public class ConsumerImpl extends ConsumerBase {
         NonDurable
     }
 
-    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig conf,
-            ExecutorService listenerExecutor, int partitionIndex, CompletableFuture<Consumer<byte[]>> subscribeFuture) {
+    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
+            ExecutorService listenerExecutor, int partitionIndex, CompletableFuture<Consumer<byte[]>> subscribeFuture,
+                 MessageListener listener) {
         this(client, topic, subscription, conf, listenerExecutor, partitionIndex, subscribeFuture,
-                SubscriptionMode.Durable, null);
+                SubscriptionMode.Durable, null, listener);
     }
 
-    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig conf,
+    ConsumerImpl(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
             ExecutorService listenerExecutor, int partitionIndex, CompletableFuture<Consumer<byte[]>> subscribeFuture,
-            SubscriptionMode subscriptionMode, MessageId startMessageId) {
-        super(client, topic, subscription, conf, conf.getReceiverQueueSize(), listenerExecutor, subscribeFuture);
+            SubscriptionMode subscriptionMode, MessageId startMessageId, MessageListener listener) {
+        super(client, topic, subscription, conf, conf.getReceiverQueueSize(), listenerExecutor, subscribeFuture, listener);
         this.consumerId = client.newConsumerId();
         this.subscriptionMode = subscriptionMode;
         this.startMessageId = startMessageId != null ? new BatchMessageIdImpl((MessageIdImpl) startMessageId) : null;

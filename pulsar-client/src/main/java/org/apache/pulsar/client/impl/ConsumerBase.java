@@ -53,15 +53,17 @@ public abstract class ConsumerBase extends HandlerBase implements Consumer<byte[
     protected final ConcurrentLinkedQueue<CompletableFuture<Message<byte[]>>> pendingReceives;
     protected final int maxReceiverQueueSize;
 
-    protected ConsumerBase(PulsarClientImpl client, String topic, String subscription, ConsumerConfig conf,
-            int receiverQueueSize, ExecutorService listenerExecutor, CompletableFuture<Consumer<byte[]>> subscribeFuture) {
+
+    protected ConsumerBase(PulsarClientImpl client, String topic, String subscription, ConsumerConfig<byte[]> conf,
+            int receiverQueueSize, ExecutorService listenerExecutor, CompletableFuture<Consumer<byte[]>> subscribeFuture,
+            MessageListener listener) {
         super(client, topic, new Backoff(100, TimeUnit.MILLISECONDS, 60, TimeUnit.SECONDS, 0 , TimeUnit.MILLISECONDS));
         this.maxReceiverQueueSize = receiverQueueSize;
         this.subscription = subscription;
         this.conf = conf;
         this.consumerName = conf.getConsumerName() == null ? ConsumerName.generateRandomName() : conf.getConsumerName();
         this.subscribeFuture = subscribeFuture;
-        this.listener = conf.getMessageListener();
+        this.listener = listener;
         if (receiverQueueSize <= 1) {
             this.incomingMessages = Queues.newArrayBlockingQueue(1);
         } else {

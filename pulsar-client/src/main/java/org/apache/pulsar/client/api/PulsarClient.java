@@ -209,6 +209,21 @@ public interface PulsarClient extends Closeable {
     CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription);
 
     /**
+     * Subscribe to the given topic and subscription combination with default {@code ConsumerConfiguration}
+     *
+     * @param topic
+     *            The name of the topic
+     * @param subscription
+     *            The name of the subscription
+     * @param listener
+     *            A listener that will be called in order for every message received
+     * @return The {@code Consumer} object
+     * @throws PulsarClientException
+     * @throws InterruptedException
+     */
+    Consumer<byte[]> subscribe(String topic, String subscription, MessageListener listener) throws PulsarClientException;
+
+    /**
      * Asynchronously subscribe to the given topic and subscription combination using default
      * {@code ConsumerConfiguration}
      *
@@ -221,6 +236,21 @@ public interface PulsarClient extends Closeable {
      * @return Future of the {@code Consumer} object
      */
     <T> CompletableFuture<Consumer<T>> subscribeAsync(String topic, String subscription, Schema<T> schema);
+
+    /**
+     * Asynchronously subscribe to the given topic and subscription combination using default
+     * {@code ConsumerConfiguration}
+     *
+     * @param topic
+     *            The topic name
+     * @param subscription
+     *            The subscription name
+     *
+     * @param listener
+     *            A listener that will be called in order for every message received
+     * @return Future of the {@code Consumer} object
+     */
+    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, MessageListener listener);
 
     /**
      * Subscribe to the given topic and subscription combination with given {@code ConsumerConfiguration}
@@ -253,6 +283,22 @@ public interface PulsarClient extends Closeable {
     <T> Consumer<T> subscribe(String topic, String subscription, ConsumerConfig<T> conf, Schema<T> schema) throws PulsarClientException;
 
     /**
+     * Subscribe to the given topic and subscription combination with given {@code ConsumerConfiguration}
+     *
+     * @param topic
+     *            The name of the topic
+     * @param subscription
+     *            The name of the subscription
+     * @param conf
+     *            The {@code ConsumerConfiguration} object
+     * @param listener
+     *            A listener that will be called in order for every message received
+     * @return The {@code Consumer} object
+     * @throws PulsarClientException
+     */
+    Consumer<byte[]> subscribe(String topic, String subscription, ConsumerConfig<byte[]> conf, MessageListener listener) throws PulsarClientException;
+
+    /**
      * Asynchronously subscribe to the given topic and subscription combination using given
      * {@code ConsumerConfiguration}
      *
@@ -281,6 +327,22 @@ public interface PulsarClient extends Closeable {
      * @return Future of the {@code Consumer} object
      */
     <T> CompletableFuture<Consumer<T>> subscribeAsync(String topic, String subscription, ConsumerConfig<T> conf, Schema<T> schema);
+
+    /**
+     * Asynchronously subscribe to the given topic and subscription combination using given
+     * {@code ConsumerConfiguration}
+     *
+     * @param topic
+     *            The name of the topic
+     * @param subscription
+     *            The name of the subscription
+     * @param conf
+     *            The {@code ConsumerConfiguration} object
+     * @param listener
+     *            A listener that will be called in order for every message received
+     * @return Future of the {@code Consumer} object
+     */
+    CompletableFuture<Consumer<byte[]>> subscribeAsync(String topic, String subscription, ConsumerConfig<byte[]> conf, MessageListener listener);
 
     /**
      * Create a topic reader with given {@code ReaderConfiguration} for reading messages from the specified topic.
@@ -364,6 +426,34 @@ public interface PulsarClient extends Closeable {
     CompletableFuture<Reader<byte[]>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf);
 
     /**
+     * Create a topic reader with given {@code ReaderConfiguration} for reading messages from the specified topic.
+     * <p>
+     * The Reader provides a low-level abstraction that allows for manual positioning in the topic, without using a
+     * subscription. Reader can only work on non-partitioned topics.
+     * <p>
+     * The initial reader positioning is done by specifying a message id. The options are:
+     * <ul>
+     * <li><code>MessageId.earliest</code> : Start reading from the earliest message available in the topic
+     * <li><code>MessageId.latest</code> : Start reading from the end topic, only getting messages published after the
+     * reader was created
+     * <li><code>MessageId</code> : When passing a particular message id, the reader will position itself on that
+     * specific position. The first message to be read will be the message next to the specified messageId.
+     * </ul>
+     *
+     * @param topic
+     *            The name of the topic where to read
+     * @param startMessageId
+     *            The message id where the reader will position itself. The first message returned will be the one after
+     *            the specified startMessageId
+     * @param conf
+     *            The {@code ReaderConfiguration} object
+     * @param listener
+     *            A listener that will be called in order for every message received
+     * @return The {@code Reader} object
+     */
+    Reader<byte[]> createReader(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf, ReaderListener listener) throws PulsarClientException;
+
+    /**
      * Asynchronously create a topic reader with given {@code ReaderConfiguration} for reading messages from the
      * specified topic.
      * <p>
@@ -391,6 +481,35 @@ public interface PulsarClient extends Closeable {
      * @return Future of the asynchronously created producer object
      */
     <T> CompletableFuture<Reader<T>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfig<T> conf, Schema<T> schema);
+
+    /**
+     * Asynchronously create a topic reader with given {@code ReaderConfiguration} for reading messages from the
+     * specified topic.
+     * <p>
+     * The Reader provides a low-level abstraction that allows for manual positioning in the topic, without using a
+     * subscription. Reader can only work on non-partitioned topics.
+     * <p>
+     * The initial reader positioning is done by specifying a message id. The options are:
+     * <ul>
+     * <li><code>MessageId.earliest</code> : Start reading from the earliest message available in the topic
+     * <li><code>MessageId.latest</code> : Start reading from the end topic, only getting messages published after the
+     * reader was created
+     * <li><code>MessageId</code> : When passing a particular message id, the reader will position itself on that
+     * specific position. The first message to be read will be the message next to the specified messageId.
+     * </ul>
+     *
+     * @param topic
+     *            The name of the topic where to read
+     * @param startMessageId
+     *            The message id where the reader will position itself. The first message returned will be the one after
+     *            the specified startMessageId
+     * @param conf
+     *            The {@code ReaderConfiguration} object
+     * @param listener
+     *            A listener that will be called in order for every message received
+     * @return Future of the asynchronously created producer object
+     */
+    CompletableFuture<Reader<byte[]>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf, ReaderListener listener);
 
     /**
      * Close the PulsarClient and release all the resources.
