@@ -109,7 +109,10 @@ public class RawReaderImpl implements RawReader {
             if (future == null) {
                 assert(messageAndCnx == null);
             } else {
-                future.complete(messageAndCnx.msg);
+                if (!future.complete(messageAndCnx.msg)) {
+                    messageAndCnx.msg.close();
+                    closeAsync();
+                }
 
                 ClientCnx currentCnx = cnx();
                 if (currentCnx == messageAndCnx.cnx) {
@@ -131,10 +134,14 @@ public class RawReaderImpl implements RawReader {
                 while (!pendingRawReceives.isEmpty()) {
                     toError.add(pendingRawReceives.remove());
                 }
+                RawMessageAndCnx m = incomingRawMessages.poll();
+                while (m != null) {
+                    m.msg.close();
+                    m = incomingRawMessages.poll();
+                }
                 incomingRawMessages.clear();
             }
-            toError.forEach((f) -> f.completeExceptionally(
-                                    new PulsarClientException.ConsumerBusyException("Sought while reading")));
+            toError.forEach((f) -> f.cancel(false));
         }
 
         @Override
