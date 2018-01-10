@@ -399,7 +399,7 @@ public class SimpleProducerConsumerTest extends ProducerConsumerBase {
         }
 
         try {
-            Producer producer = pulsarClient.createProducer("persistent://my-property/use/my-ns/my-topic7");
+            Producer producer = pulsarClient.createProducer("persistent://my-property/use/my-ns/my-topic7", (ProducerConfiguration) null);
             Assert.fail("should fail");
         } catch (PulsarClientException e) {
             Assert.assertTrue(e instanceof PulsarClientException.InvalidConfigurationException);
