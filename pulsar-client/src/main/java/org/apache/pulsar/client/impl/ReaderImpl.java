@@ -33,9 +33,8 @@ public class ReaderImpl implements Reader<byte[]> {
     private final ConsumerImpl consumer;
 
     public ReaderImpl(PulsarClientImpl client, String topic, MessageId startMessageId,
-
-        ReaderConfig<byte[]> readerConfiguration, ExecutorService listenerExecutor,
-        CompletableFuture<Consumer<byte[]>> consumerFuture, ReaderListener readerListener) {
+                      ReaderConfiguration readerConfiguration, ExecutorService listenerExecutor,
+                      CompletableFuture<Consumer<byte[]>> consumerFuture, ReaderListener readerListener) {
 
         String subscription = "reader-" + DigestUtils.sha1Hex(UUID.randomUUID().toString()).substring(0, 10);
 

@@ -368,7 +368,7 @@ public interface PulsarClient extends Closeable {
      *            The {@code ReaderConfiguration} object
      * @return The {@code Reader} object
      */
-    Reader<byte[]> createReader(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf) throws PulsarClientException;
+    Reader<byte[]> createReader(String topic, MessageId startMessageId, ReaderConfiguration conf) throws PulsarClientException;
 
     /**
      * Create a topic reader with given {@code ReaderConfiguration} for reading messages from the specified topic.
@@ -396,7 +396,7 @@ public interface PulsarClient extends Closeable {
      *            A schema used to validate objects as well as serialize/deserialize
      * @return The {@code Reader} object
      */
-    <T> Reader<T> createReader(String topic, MessageId startMessageId, ReaderConfig<T> conf, Schema<T> schema) throws PulsarClientException;
+    <T> Reader<T> createReader(String topic, MessageId startMessageId, ReaderConfiguration conf, Schema<T> schema) throws PulsarClientException;
 
     /**
      * Asynchronously create a topic reader with given {@code ReaderConfiguration} for reading messages from the
@@ -423,7 +423,7 @@ public interface PulsarClient extends Closeable {
      *            The {@code ReaderConfiguration} object
      * @return Future of the asynchronously created producer object
      */
-    CompletableFuture<Reader<byte[]>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf);
+    CompletableFuture<Reader<byte[]>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfiguration conf);
 
     /**
      * Create a topic reader with given {@code ReaderConfiguration} for reading messages from the specified topic.
@@ -451,7 +451,7 @@ public interface PulsarClient extends Closeable {
      *            A listener that will be called in order for every message received
      * @return The {@code Reader} object
      */
-    Reader<byte[]> createReader(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf, ReaderListener listener) throws PulsarClientException;
+    Reader<byte[]> createReader(String topic, MessageId startMessageId, ReaderConfiguration conf, ReaderListener listener) throws PulsarClientException;
 
     /**
      * Asynchronously create a topic reader with given {@code ReaderConfiguration} for reading messages from the
@@ -480,7 +480,7 @@ public interface PulsarClient extends Closeable {
      *            A schema used to validate objects as well as serialize/deserialize
      * @return Future of the asynchronously created producer object
      */
-    <T> CompletableFuture<Reader<T>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfig<T> conf, Schema<T> schema);
+    <T> CompletableFuture<Reader<T>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfiguration conf, Schema<T> schema);
 
     /**
      * Asynchronously create a topic reader with given {@code ReaderConfiguration} for reading messages from the
@@ -509,7 +509,7 @@ public interface PulsarClient extends Closeable {
      *            A listener that will be called in order for every message received
      * @return Future of the asynchronously created producer object
      */
-    CompletableFuture<Reader<byte[]>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfig<byte[]> conf, ReaderListener listener);
+    CompletableFuture<Reader<byte[]>> createReaderAsync(String topic, MessageId startMessageId, ReaderConfiguration conf, ReaderListener listener);
 
     /**
      * Close the PulsarClient and release all the resources.

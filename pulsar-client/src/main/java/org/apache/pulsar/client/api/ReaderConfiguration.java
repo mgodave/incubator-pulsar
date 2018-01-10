@@ -21,11 +21,11 @@ package org.apache.pulsar.client.api;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class ReaderConfiguration<T> implements ReaderConfig<T> {
+public class ReaderConfiguration {
 
     private int receiverQueueSize = 1000;
 
-    private ReaderListener<T> readerListener;
+    private ReaderListener<byte[]> readerListener;
 
     private String readerName = null;
 
@@ -38,9 +38,8 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
      *
      * @return the configured {@link ReaderListener} for the reader
      */
-    @Override
     @Deprecated
-    public ReaderListener getReaderListener() {
+    public ReaderListener<byte[]> getReaderListener() {
         return this.readerListener;
     }
 
@@ -57,7 +56,7 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
      *            the listener object
      */
     @Deprecated
-    public ReaderConfiguration setReaderListener(ReaderListener readerListener) {
+    public ReaderConfiguration setReaderListener(ReaderListener<byte[]> readerListener) {
         checkNotNull(readerListener);
         this.readerListener = readerListener;
         return this;
@@ -66,7 +65,6 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
     /**
      * @return the configure receiver queue size value
      */
-    @Override
     public int getReceiverQueueSize() {
         return this.receiverQueueSize;
     }
@@ -84,7 +82,7 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
      * @param cryptoKeyReader
      *            CryptoKeyReader object
      */
-    public ReaderConfiguration<T> setCryptoKeyReader(CryptoKeyReader cryptoKeyReader) {
+    public ReaderConfiguration setCryptoKeyReader(CryptoKeyReader cryptoKeyReader) {
         checkNotNull(cryptoKeyReader);
         this.cryptoKeyReader = cryptoKeyReader;
         return this;
@@ -102,7 +100,6 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
     /**
      * @return The ConsumerCryptoFailureAction
      */
-    @Override
     public ConsumerCryptoFailureAction getCryptoFailureAction() {
         return this.cryptoFailureAction;
     }
@@ -119,7 +116,7 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
      * @param receiverQueueSize
      *            the new receiver queue size value
      */
-    public ReaderConfiguration<T> setReceiverQueueSize(int receiverQueueSize) {
+    public ReaderConfiguration setReceiverQueueSize(int receiverQueueSize) {
         checkArgument(receiverQueueSize >= 0, "Receiver queue size cannot be negative");
         this.receiverQueueSize = receiverQueueSize;
         return this;
@@ -128,7 +125,6 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
     /**
      * @return the consumer name
      */
-    @Override
     public String getReaderName() {
         return readerName;
     }
@@ -138,7 +134,7 @@ public class ReaderConfiguration<T> implements ReaderConfig<T> {
      *
      * @param readerName
      */
-    public ReaderConfiguration<T> setReaderName(String readerName) {
+    public ReaderConfiguration setReaderName(String readerName) {
         checkArgument(readerName != null && !readerName.equals(""));
         this.readerName = readerName;
         return this;

@@ -29,12 +29,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
-import org.apache.pulsar.client.api.ClientConfiguration;
-import org.apache.pulsar.client.api.MessageId;
-import org.apache.pulsar.client.api.PulsarClient;
-import org.apache.pulsar.client.api.Reader;
-import org.apache.pulsar.client.api.ReaderConfiguration;
-import org.apache.pulsar.client.api.ReaderListener;
+import org.apache.pulsar.client.api.*;
 import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.apache.pulsar.client.impl.PulsarClientImpl;
 import org.apache.pulsar.client.util.FutureUtil;
@@ -193,7 +188,7 @@ public class PerformanceReader {
         clientConf.setTlsTrustCertsFilePath(arguments.tlsTrustCertsFilePath);
         PulsarClient pulsarClient = new PulsarClientImpl(arguments.serviceURL, clientConf);
 
-        List<CompletableFuture<Reader>> futures = Lists.newArrayList();
+        List<CompletableFuture<Reader<byte[]>>> futures = Lists.newArrayList();
         ReaderConfiguration readerConfig = new ReaderConfiguration();
         readerConfig.setReaderListener(listener);
         readerConfig.setReceiverQueueSize(arguments.receiverQueueSize);
