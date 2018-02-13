@@ -18,10 +18,9 @@
  */
 package org.apache.pulsar.client.api;
 
-import org.apache.pulsar.common.api.proto.PulsarApi;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.pulsar.common.api.proto.PulsarApi;
 
 /**
  */

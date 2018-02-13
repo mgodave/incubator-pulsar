@@ -18,17 +18,15 @@
  */
 package org.apache.pulsar.client.api;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import java.lang.reflect.Method;
 import java.util.Set;
-
 import org.apache.pulsar.broker.auth.MockedPulsarServiceBaseTest;
 import org.apache.pulsar.common.policies.data.ClusterData;
 import org.apache.pulsar.common.policies.data.PropertyAdmin;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public abstract class ProducerConsumerBase extends MockedPulsarServiceBaseTest {
     protected String methodName;

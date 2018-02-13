@@ -20,7 +20,6 @@ package org.apache.pulsar.broker.loadbalance;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.pulsar.broker.PulsarServerException;
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.broker.ServiceConfiguration;

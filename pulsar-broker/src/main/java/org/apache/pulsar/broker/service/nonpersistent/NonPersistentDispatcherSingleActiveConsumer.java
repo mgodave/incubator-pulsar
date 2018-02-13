@@ -21,7 +21,6 @@ package org.apache.pulsar.broker.service.nonpersistent;
 import static org.apache.pulsar.broker.service.Consumer.getBatchSizeforEntry;
 
 import java.util.List;
-
 import org.apache.bookkeeper.mledger.Entry;
 import org.apache.bookkeeper.mledger.util.Rate;
 import org.apache.pulsar.broker.service.AbstractDispatcherSingleActiveConsumer;

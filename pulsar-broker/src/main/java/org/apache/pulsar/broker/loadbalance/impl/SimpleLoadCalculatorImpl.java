@@ -18,14 +18,12 @@
  */
 package org.apache.pulsar.broker.loadbalance.impl;
 
+import com.google.common.collect.Maps;
 import java.util.Map;
-
 import org.apache.pulsar.broker.loadbalance.LoadCalculator;
 import org.apache.pulsar.broker.loadbalance.LoadReport;
 import org.apache.pulsar.broker.loadbalance.ResourceDescription;
 import org.apache.pulsar.broker.loadbalance.ServiceRequest;
-
-import com.google.common.collect.Maps;
 
 public class SimpleLoadCalculatorImpl implements LoadCalculator {
 

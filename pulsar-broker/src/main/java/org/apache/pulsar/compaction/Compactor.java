@@ -22,13 +22,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.apache.bookkeeper.client.BookKeeper;
-
 import org.apache.pulsar.broker.ServiceConfiguration;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.RawReader;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

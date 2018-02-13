@@ -19,9 +19,7 @@
 package org.apache.pulsar.broker;
 
 import java.io.IOException;
-
 import org.apache.bookkeeper.client.BookKeeper;
-import org.apache.pulsar.broker.ServiceConfiguration;
 import org.apache.zookeeper.ZooKeeper;
 
 /**

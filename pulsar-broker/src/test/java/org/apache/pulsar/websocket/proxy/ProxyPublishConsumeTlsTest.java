@@ -27,7 +27,6 @@ import java.security.GeneralSecurityException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.bookkeeper.test.PortManager;
 import org.apache.pulsar.client.api.TlsProducerConsumerBase;
 import org.apache.pulsar.common.util.SecurityUtility;

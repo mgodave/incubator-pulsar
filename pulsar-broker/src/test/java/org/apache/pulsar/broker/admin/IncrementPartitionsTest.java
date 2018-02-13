@@ -20,6 +20,8 @@ package org.apache.pulsar.broker.admin;
 
 import static org.testng.Assert.assertEquals;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.pulsar.broker.admin.AdminApiTest.MockedPulsarService;
 import org.apache.pulsar.broker.auth.MockedPulsarServiceBaseTest;
 import org.apache.pulsar.client.api.Consumer;
@@ -29,9 +31,6 @@ import org.apache.pulsar.common.policies.data.PropertyAdmin;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class IncrementPartitionsTest extends MockedPulsarServiceBaseTest {
 

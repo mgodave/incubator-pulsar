@@ -21,7 +21,6 @@ package org.apache.pulsar.broker.service;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
-
 import org.apache.pulsar.client.api.MessageId;
 import org.apache.pulsar.client.impl.MessageIdImpl;
 import org.testng.annotations.Test;

@@ -21,7 +21,6 @@ package org.apache.pulsar.broker.loadbalance.impl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.pulsar.broker.BrokerData;

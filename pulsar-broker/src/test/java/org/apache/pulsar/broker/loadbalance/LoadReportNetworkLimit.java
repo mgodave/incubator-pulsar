@@ -18,13 +18,14 @@
  */
 package org.apache.pulsar.broker.loadbalance;
 
+import static org.testng.Assert.assertEquals;
+
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.pulsar.broker.auth.MockedPulsarServiceBaseTest;
 import org.apache.pulsar.policies.data.loadbalancer.LoadManagerReport;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 public class LoadReportNetworkLimit extends MockedPulsarServiceBaseTest {
 

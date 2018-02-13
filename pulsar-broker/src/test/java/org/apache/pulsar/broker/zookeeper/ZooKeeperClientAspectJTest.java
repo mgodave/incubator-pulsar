@@ -22,6 +22,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
+import com.google.common.util.concurrent.AtomicDouble;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.bookkeeper.test.PortManager;
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.broker.service.BrokerService;
@@ -59,8 +59,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.google.common.util.concurrent.AtomicDouble;
 
 public class ZooKeeperClientAspectJTest {
 

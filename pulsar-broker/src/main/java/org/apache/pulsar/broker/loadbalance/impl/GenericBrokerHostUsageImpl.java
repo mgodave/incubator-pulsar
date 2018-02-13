@@ -19,17 +19,14 @@
 package org.apache.pulsar.broker.loadbalance.impl;
 
 import com.sun.management.OperatingSystemMXBean;
-
+import java.lang.management.ManagementFactory;
+import java.util.concurrent.TimeUnit;
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.broker.loadbalance.BrokerHostUsage;
 import org.apache.pulsar.policies.data.loadbalancer.ResourceUsage;
 import org.apache.pulsar.policies.data.loadbalancer.SystemResourceUsage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.lang.management.ManagementFactory;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Class that will return the broker host usage.

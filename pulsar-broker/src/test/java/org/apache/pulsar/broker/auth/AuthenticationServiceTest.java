@@ -23,19 +23,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
+import com.google.common.collect.Sets;
 import java.io.IOException;
 import java.util.Set;
-
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.pulsar.broker.ServiceConfiguration;
 import org.apache.pulsar.broker.authentication.AuthenticationDataSource;
 import org.apache.pulsar.broker.authentication.AuthenticationProvider;
 import org.apache.pulsar.broker.authentication.AuthenticationService;
 import org.testng.annotations.Test;
-
-import com.google.common.collect.Sets;
 
 public class AuthenticationServiceTest {
 

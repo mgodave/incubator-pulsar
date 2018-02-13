@@ -18,11 +18,9 @@
  */
 package org.apache.pulsar.broker.stats;
 
-import java.util.Map;
-
-import org.apache.pulsar.common.stats.Metrics;
-
 import com.google.common.collect.Maps;
+import java.util.Map;
+import org.apache.pulsar.common.stats.Metrics;
 
 public class NamespaceStats {
 

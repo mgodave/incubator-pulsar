@@ -18,14 +18,6 @@
  */
 package org.apache.pulsar.broker.stats.prometheus;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Enumeration;
-
-import org.apache.pulsar.broker.PulsarService;
-import org.apache.pulsar.broker.stats.metrics.JvmMetrics;
-import org.apache.pulsar.utils.SimpleTextOutputStream;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.util.internal.PlatformDependent;
@@ -36,6 +28,12 @@ import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Gauge.Child;
 import io.prometheus.client.hotspot.DefaultExports;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Enumeration;
+import org.apache.pulsar.broker.PulsarService;
+import org.apache.pulsar.broker.stats.metrics.JvmMetrics;
+import org.apache.pulsar.utils.SimpleTextOutputStream;
 
 /**
  * Generate metrics aggregated at the namespace level and optionally at a topic level and formats them out

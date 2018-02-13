@@ -18,14 +18,12 @@
  */
 package org.apache.pulsar.broker.stats;
 
+import com.google.common.collect.Maps;
 import java.util.Map;
-
 import org.apache.bookkeeper.mledger.proto.PendingBookieOpsStats;
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.broker.service.persistent.PersistentTopic;
 import org.apache.pulsar.common.naming.DestinationName;
-
-import com.google.common.collect.Maps;
 
 /**
  */

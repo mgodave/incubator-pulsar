@@ -18,28 +18,24 @@
  */
 package org.apache.pulsar.broker.stats.metrics;
 
-import java.lang.management.ManagementFactory;
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
-
-import org.apache.pulsar.broker.PulsarService;
-import org.apache.pulsar.common.stats.Metrics;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.collect.Lists;
-
 import io.netty.buffer.PoolArenaMetric;
 import io.netty.buffer.PoolChunkListMetric;
 import io.netty.buffer.PoolChunkMetric;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.util.internal.PlatformDependent;
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
+import org.apache.pulsar.broker.PulsarService;
+import org.apache.pulsar.common.stats.Metrics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JvmMetrics extends AbstractMetrics {
 

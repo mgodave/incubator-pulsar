@@ -19,7 +19,6 @@
 package org.apache.pulsar.broker.web;
 
 import java.io.File;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;

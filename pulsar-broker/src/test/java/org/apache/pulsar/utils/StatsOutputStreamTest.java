@@ -21,16 +21,11 @@ package org.apache.pulsar.utils;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-import java.lang.reflect.Method;
-import java.nio.charset.Charset;
-
-import org.apache.pulsar.utils.CopyOnWriteArrayList;
-import org.apache.pulsar.utils.StatsOutputStream;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import java.nio.charset.Charset;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class StatsOutputStreamTest {
 

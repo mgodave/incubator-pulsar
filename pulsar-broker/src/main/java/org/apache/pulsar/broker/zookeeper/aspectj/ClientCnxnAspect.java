@@ -18,11 +18,10 @@
  */
 package org.apache.pulsar.broker.zookeeper.aspectj;
 
+import com.google.common.collect.Lists;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-
-import com.google.common.collect.Lists;
 import org.apache.bookkeeper.util.MathUtils;
 import org.apache.jute.Record;
 import org.apache.zookeeper.proto.ConnectRequest;

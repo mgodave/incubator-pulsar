@@ -21,8 +21,6 @@ package org.apache.pulsar.client.impl;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
-
-import org.apache.pulsar.client.impl.BatchMessageIdImpl;
 import org.testng.annotations.Test;
 
 /**

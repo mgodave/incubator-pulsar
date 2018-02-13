@@ -19,7 +19,6 @@
 package org.apache.pulsar.broker.service;
 
 import java.util.concurrent.CompletableFuture;
-
 import org.apache.pulsar.common.policies.data.ReplicatorStats;
 
 public interface Replicator {

@@ -19,17 +19,14 @@
 package org.apache.pulsar.client.impl;
 
 import io.netty.buffer.ByteBuf;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.pulsar.client.api.RawMessage;
-
 import org.apache.pulsar.common.api.Commands;
 import org.apache.pulsar.common.api.proto.PulsarApi.MessageMetadata;
 import org.apache.pulsar.common.api.proto.PulsarApi.SingleMessageMetadata;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

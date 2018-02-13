@@ -23,7 +23,6 @@ import static org.apache.pulsar.broker.service.Consumer.getBatchSizeforEntry;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
-
 import org.apache.bookkeeper.mledger.Entry;
 import org.apache.bookkeeper.mledger.util.Rate;
 import org.apache.pulsar.broker.service.AbstractDispatcherMultipleConsumers;

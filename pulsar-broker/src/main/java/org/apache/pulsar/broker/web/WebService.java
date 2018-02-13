@@ -18,6 +18,9 @@
  */
 package org.apache.pulsar.broker.web;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.google.common.collect.Lists;
+import io.netty.util.concurrent.DefaultThreadFactory;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -25,9 +28,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javax.servlet.DispatcherType;
-
 import org.apache.pulsar.broker.PulsarServerException;
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.common.util.ObjectMapperFactory;
@@ -52,11 +53,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import com.google.common.collect.Lists;
-
-import io.netty.util.concurrent.DefaultThreadFactory;
 
 /**
  * Web Service embedded into Pulsar

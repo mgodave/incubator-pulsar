@@ -20,19 +20,16 @@ package org.apache.pulsar.client.api;
 
 import static org.mockito.Mockito.spy;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import java.net.URI;
-
 import org.apache.pulsar.client.admin.PulsarAdmin;
 import org.apache.pulsar.common.policies.data.ClusterData;
 import org.apache.pulsar.common.policies.data.PropertyAdmin;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class TlsProducerConsumerBase extends ProducerConsumerBase {
     private static final Logger log = LoggerFactory.getLogger(TlsProducerConsumerBase.class);

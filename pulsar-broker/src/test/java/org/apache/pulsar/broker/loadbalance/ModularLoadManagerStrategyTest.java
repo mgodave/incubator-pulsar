@@ -22,7 +22,6 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.Map;
 import java.util.Optional;
-
 import org.apache.pulsar.broker.BrokerData;
 import org.apache.pulsar.broker.BundleData;
 import org.apache.pulsar.broker.ServiceConfiguration;

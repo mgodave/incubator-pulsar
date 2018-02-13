@@ -18,14 +18,13 @@
  */
 package org.apache.pulsar.broker.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.nio.charset.StandardCharsets;
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.broker.ServiceConfiguration;
 import org.apache.pulsar.zookeeper.LocalBookkeeperEnsemble;
 import org.apache.zookeeper.data.Stat;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import java.nio.charset.StandardCharsets;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

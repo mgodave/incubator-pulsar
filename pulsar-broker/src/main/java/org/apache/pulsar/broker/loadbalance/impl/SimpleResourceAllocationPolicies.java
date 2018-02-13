@@ -20,7 +20,6 @@ package org.apache.pulsar.broker.loadbalance.impl;
 
 import java.util.Map;
 import java.util.Optional;
-
 import org.apache.pulsar.broker.PulsarService;
 import org.apache.pulsar.broker.admin.AdminResource;
 import org.apache.pulsar.broker.loadbalance.LoadReport;

@@ -24,7 +24,6 @@ import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.pulsar.broker.service.persistent.PersistentSubscription;
 import org.apache.pulsar.broker.service.persistent.PersistentTopic;
 import org.apache.pulsar.client.api.ConsumerConfiguration;

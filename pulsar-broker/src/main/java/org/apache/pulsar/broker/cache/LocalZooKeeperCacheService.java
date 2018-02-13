@@ -24,7 +24,6 @@ import static org.apache.pulsar.broker.web.PulsarWebResource.joinPath;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-
 import org.apache.bookkeeper.util.ZkUtils;
 import org.apache.pulsar.broker.PulsarServerException;
 import org.apache.pulsar.broker.namespace.NamespaceEphemeralData;

@@ -18,12 +18,11 @@
  */
 package org.apache.pulsar.broker.stats.prometheus;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.bookkeeper.mledger.impl.ManagedLedgerMBeanImpl;
 import org.apache.bookkeeper.mledger.util.StatsBuckets;
 import org.apache.pulsar.utils.SimpleTextOutputStream;
-
-import java.util.HashMap;
-import java.util.Map;
 
 class TopicStats {
 

@@ -18,10 +18,12 @@
  */
 package org.apache.pulsar.client.impl;
 
+import com.google.common.collect.Lists;
+import io.netty.channel.EventLoopGroup;
+import io.netty.util.concurrent.DefaultThreadFactory;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-
 import org.apache.pulsar.broker.auth.MockedPulsarServiceBaseTest;
 import org.apache.pulsar.client.api.ClientConfiguration;
 import org.apache.pulsar.common.util.netty.EventLoopUtil;
@@ -29,11 +31,6 @@ import org.mockito.Mockito;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import com.google.common.collect.Lists;
-
-import io.netty.channel.EventLoopGroup;
-import io.netty.util.concurrent.DefaultThreadFactory;
 
 public class ConnectionPoolTest extends MockedPulsarServiceBaseTest {
 
