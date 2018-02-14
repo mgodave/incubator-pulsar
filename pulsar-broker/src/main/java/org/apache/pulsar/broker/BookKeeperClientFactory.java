@@ -23,7 +23,7 @@ import org.apache.bookkeeper.client.BookKeeper;
 import org.apache.zookeeper.ZooKeeper;
 
 /**
- * Provider of a new BookKeeper client instance
+ * Provider of a new BookKeeper client instance.
  */
 public interface BookKeeperClientFactory {
     BookKeeper create(ServiceConfiguration conf, ZooKeeper zkClient) throws IOException;

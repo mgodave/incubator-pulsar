@@ -99,7 +99,7 @@ public abstract class AdminResource extends PulsarWebResource {
     }
 
     /**
-     * Get the domain of the destination (whether it's queue or topic)
+     * Get the domain of the destination (whether it's queue or topic).
      */
     protected String domain() {
         if (uri.getPath().startsWith("persistent/")) {
@@ -177,7 +177,7 @@ public abstract class AdminResource extends PulsarWebResource {
     }
 
     /**
-     * Get the list of namespaces (on every cluster) for a given property
+     * Get the list of namespaces (on every cluster) for a given property.
      *
      * @param property
      *            the property name
@@ -190,7 +190,8 @@ public abstract class AdminResource extends PulsarWebResource {
         for (String clusterOrNamespace : globalZk().getChildren(path(POLICIES, property), false)) {
             // Then get the list of namespaces
             try {
-                final List<String> children = globalZk().getChildren(path(POLICIES, property, clusterOrNamespace), false);
+                final List<String> children = globalZk()
+                    .getChildren(path(POLICIES, property, clusterOrNamespace), false);
                 if (children == null || children.isEmpty()) {
                     String namespace = NamespaceName.get(property, clusterOrNamespace).toString();
                     // if the length is 0 then this is probably a leftover cluster from namespace created
@@ -263,7 +264,7 @@ public abstract class AdminResource extends PulsarWebResource {
     }
 
     /**
-     * Redirect the call to the specified broker
+     * Redirect the call to the specified broker.
      *
      * @param broker
      *            Broker name
@@ -373,7 +374,9 @@ public abstract class AdminResource extends PulsarWebResource {
             throw new RestException(e);
         }
 
-        String path = path(PARTITIONED_TOPIC_PATH_ZNODE, namespaceName.toString(), domain(), destinationName.getEncodedLocalName());
+        String path = path(
+            PARTITIONED_TOPIC_PATH_ZNODE, namespaceName.toString(), domain(), destinationName.getEncodedLocalName()
+        );
         PartitionedTopicMetadata partitionMetadata = fetchPartitionedTopicMetadata(pulsar(), path);
 
         if (log.isDebugEnabled()) {

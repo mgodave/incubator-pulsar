@@ -27,7 +27,7 @@ import org.apache.pulsar.policies.data.loadbalancer.SystemResourceUsage;
  */
 public interface BrokerHostUsage {
     /**
-     * Returns the host usage information in the following format -
+     * Returns the host usage information in the following format -.
      *
      * @return Broker host usage in the json string format
      */

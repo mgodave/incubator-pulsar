@@ -43,12 +43,14 @@ public abstract class AbstractReplicator {
     protected final int producerQueueSize;
     protected final ProducerConfiguration producerConfiguration;
 
-    protected final Backoff backOff = new Backoff(100, TimeUnit.MILLISECONDS, 1, TimeUnit.MINUTES, 0 ,TimeUnit.MILLISECONDS);
+    protected final Backoff backOff = new Backoff(
+        100, TimeUnit.MILLISECONDS, 1, TimeUnit.MINUTES, 0, TimeUnit.MILLISECONDS
+    );
 
     protected final String replicatorPrefix;
 
-    protected static final AtomicReferenceFieldUpdater<AbstractReplicator, State> STATE_UPDATER = AtomicReferenceFieldUpdater
-            .newUpdater(AbstractReplicator.class, State.class, "state");
+    protected static final AtomicReferenceFieldUpdater<AbstractReplicator, State> STATE_UPDATER =
+        AtomicReferenceFieldUpdater.newUpdater(AbstractReplicator.class, State.class, "state");
     private volatile State state = State.Stopped;
 
     protected enum State {

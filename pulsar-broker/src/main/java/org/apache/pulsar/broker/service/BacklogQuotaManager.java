@@ -74,7 +74,7 @@ public class BacklogQuotaManager {
     }
 
     /**
-     * Handle exceeded backlog by using policies set in the zookeeper for given topic
+     * Handle exceeded backlog by using policies set in the zookeeper for given topic.
      *
      * @param persistentTopic
      *            Topic on which backlog has been exceeded
@@ -101,7 +101,7 @@ public class BacklogQuotaManager {
     }
 
     /**
-     * Drop the backlog on the topic
+     * Drop the backlog on the topic.
      *
      * @param persistentTopic
      *            The topic from which backlog should be dropped
@@ -175,7 +175,7 @@ public class BacklogQuotaManager {
     }
 
     /**
-     * Disconnect producers on given topic
+     * Disconnect producers on given topic.
      *
      * @param persistentTopic
      *            The topic on which all producers should be disconnected

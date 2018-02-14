@@ -39,7 +39,8 @@ abstract class AbstractMetrics {
 
     protected static final Pattern V2_LEDGER_NAME_PATTERN = Pattern.compile("^(([^/]+)/([^/]+)/([^/]+))/(.*)$");
 
-    protected static final double[] ENTRY_LATENCY_BUCKETS_MS = new double[ManagedLedgerMBeanImpl.ENTRY_LATENCY_BUCKETS_USEC.length];
+    protected static final double[] ENTRY_LATENCY_BUCKETS_MS =
+        new double[ManagedLedgerMBeanImpl.ENTRY_LATENCY_BUCKETS_USEC.length];
 
     static {
         // Convert buckets boundaries from usec to millis
@@ -48,7 +49,8 @@ abstract class AbstractMetrics {
         }
     }
 
-    protected static final double[] ENTRY_SIZE_BUCKETS_BYTES = new double[ManagedLedgerMBeanImpl.ENTRY_SIZE_BUCKETS_BYTES.length];
+    protected static final double[] ENTRY_SIZE_BUCKETS_BYTES =
+        new double[ManagedLedgerMBeanImpl.ENTRY_SIZE_BUCKETS_BYTES.length];
 
     static {
         // Convert buckets boundaries from usec to millis
@@ -67,8 +69,8 @@ abstract class AbstractMetrics {
 
     /**
      * Creates a metrics with empty immutable dimension.
-     * <p>
-     * Use this for metrics that doesn't need any dimension - i.e global metrics
+     *
+     * <p/>Use this for metrics that doesn't need any dimension - i.e global metrics
      *
      * @return
      */
@@ -82,7 +84,7 @@ abstract class AbstractMetrics {
     }
 
     /**
-     * Returns the managed ledger cache statistics from ML factory
+     * Returns the managed ledger cache statistics from ML factory.
      *
      * @return
      */
@@ -91,7 +93,7 @@ abstract class AbstractMetrics {
     }
 
     /**
-     * Returns managed ledgers map from ML factory
+     * Returns managed ledgers map from ML factory.
      *
      * @return
      */
@@ -136,7 +138,7 @@ abstract class AbstractMetrics {
     }
 
     /**
-     * Creates a dimension key for metrics
+     * Creates a dimension key for metrics.
      *
      * @param namespace
      * @param fromClusterName
@@ -152,7 +154,7 @@ abstract class AbstractMetrics {
     }
 
     /**
-     * Creates a dimension key for replication metrics
+     * Creates a dimension key for replication metrics.
      *
      * @param namespace
      * @param fromClusterName
@@ -209,7 +211,7 @@ abstract class AbstractMetrics {
         Double val = map.getOrDefault(mkey, 0.0);
         map.put(mkey, val + value);
     }
-    
+
     protected void populateMaxMap(Map<String, Long> map, String mkey, long value) {
         Long existingValue = map.get(mkey);
         if (existingValue == null || value > existingValue) {
@@ -218,7 +220,7 @@ abstract class AbstractMetrics {
     }
 
     /**
-     * Helper to manage populating destination map
+     * Helper to manage populating destination map.
      *
      * @param destStatsByDimensionMap
      * @param dimensionKey

@@ -32,7 +32,7 @@ public interface BrokerFilter {
 
     /**
      * From the given set of available broker candidates, filter those using the load data.
-     * 
+     *
      * @param brokers
      *            The currently available brokers that have not already been filtered. This set may be modified by
      *            filter.
@@ -45,6 +45,6 @@ public interface BrokerFilter {
      * @throws BrokerFilterException
      *            There was an error in the pipeline and the brokers should be reset to their original value
      */
-    public void filter(Set<String> brokers, BundleData bundleToAssign, LoadData loadData, ServiceConfiguration conf)
+    void filter(Set<String> brokers, BundleData bundleToAssign, LoadData loadData, ServiceConfiguration conf)
                        throws BrokerFilterException;
 }

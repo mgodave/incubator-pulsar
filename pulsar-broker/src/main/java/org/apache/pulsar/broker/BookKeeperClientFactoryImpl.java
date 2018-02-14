@@ -34,7 +34,7 @@ public class BookKeeperClientFactoryImpl implements BookKeeperClientFactory {
 
     private ZooKeeperCache rackawarePolicyZkCache;
     private ZooKeeperCache clientIsolationZkCache;
-    
+
     @Override
     public BookKeeper create(ServiceConfiguration conf, ZooKeeper zkClient) throws IOException {
         ClientConfiguration bkConf = new ClientConfiguration();
@@ -87,7 +87,7 @@ public class BookKeeperClientFactoryImpl implements BookKeeperClientFactory {
             throw new IOException(e);
         }
     }
-    
+
     public void close() {
         if (this.rackawarePolicyZkCache != null) {
             this.rackawarePolicyZkCache.stop();

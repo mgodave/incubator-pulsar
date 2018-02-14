@@ -34,8 +34,9 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractDispatcherSingleActiveConsumer {
 
     protected final String topicName;
-    protected static final AtomicReferenceFieldUpdater<AbstractDispatcherSingleActiveConsumer, Consumer> ACTIVE_CONSUMER_UPDATER =
-            AtomicReferenceFieldUpdater.newUpdater(AbstractDispatcherSingleActiveConsumer.class, Consumer.class, "activeConsumer");
+    protected static final AtomicReferenceFieldUpdater<AbstractDispatcherSingleActiveConsumer, Consumer>
+        ACTIVE_CONSUMER_UPDATER = AtomicReferenceFieldUpdater.newUpdater(
+            AbstractDispatcherSingleActiveConsumer.class, Consumer.class, "activeConsumer");
     private volatile Consumer activeConsumer = null;
     protected final CopyOnWriteArrayList<Consumer> consumers;
     protected CompletableFuture<Void> closeFuture = null;
@@ -163,7 +164,7 @@ public abstract class AbstractDispatcherSingleActiveConsumer {
     public SubType getType() {
         return subscriptionType;
     }
-    
+
     public Consumer getActiveConsumer() {
         return ACTIVE_CONSUMER_UPDATER.get(this);
     }
@@ -171,11 +172,11 @@ public abstract class AbstractDispatcherSingleActiveConsumer {
     public CopyOnWriteArrayList<Consumer> getConsumers() {
         return consumers;
     }
-    
+
     public boolean isConsumerConnected() {
         return ACTIVE_CONSUMER_UPDATER.get(this) != null;
     }
 
     private static final Logger log = LoggerFactory.getLogger(AbstractDispatcherSingleActiveConsumer.class);
-    
+
 }
