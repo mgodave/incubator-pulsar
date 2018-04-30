@@ -21,9 +21,11 @@ package org.apache.pulsar.common.schema;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
 public class GetSchemaResponse {
     private SchemaVersion version;
     private SchemaType type;

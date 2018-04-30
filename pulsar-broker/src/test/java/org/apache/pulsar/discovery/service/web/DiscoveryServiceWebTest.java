@@ -115,11 +115,11 @@ public class DiscoveryServiceWebTest extends ProducerConsumerBase {
             WebTarget webTarget = client.target(url);
             Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
             if (HttpMethod.PUT.equals(method)) {
-                response = (Response) invocationBuilder.put(Entity.entity(data, MediaType.APPLICATION_JSON));
+                response = invocationBuilder.put(Entity.entity(data, MediaType.APPLICATION_JSON));
             } else if (HttpMethod.GET.equals(method)) {
-                response = (Response) invocationBuilder.get();
+                response = invocationBuilder.get();
             } else if (HttpMethod.POST.equals(method)) {
-                response = (Response) invocationBuilder.post(Entity.entity(data, MediaType.APPLICATION_JSON));
+                response = invocationBuilder.post(Entity.entity(data, MediaType.APPLICATION_JSON));
             } else {
                 fail("Unsupported http method");
             }
