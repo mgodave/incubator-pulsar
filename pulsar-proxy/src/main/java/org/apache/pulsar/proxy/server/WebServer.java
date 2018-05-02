@@ -26,6 +26,7 @@ import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.pulsar.common.util.ObjectMapperFactory;
 import org.apache.pulsar.common.util.SecurityUtility;
@@ -57,12 +58,14 @@ import io.netty.util.concurrent.DefaultThreadFactory;
  */
 public class WebServer {
     private final Server server;
-    private final ExecutorService webServiceExecutor;
+    private final ThreadPoolExecutor webServiceExecutor;
     private final List<Handler> handlers = Lists.newArrayList();
     protected final int externalServicePort;
 
     public WebServer(ProxyConfiguration config) {
-        this.webServiceExecutor = Executors.newFixedThreadPool(32, new DefaultThreadFactory("pulsar-external-web"));
+        this.webServiceExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+            32, new DefaultThreadFactory("pulsar-external-web")
+        );
         this.server = new Server(new ExecutorThreadPool(webServiceExecutor));
         this.externalServicePort = config.getWebServicePort();
 

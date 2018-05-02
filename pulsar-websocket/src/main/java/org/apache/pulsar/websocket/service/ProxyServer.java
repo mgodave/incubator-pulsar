@@ -26,6 +26,7 @@ import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import javax.net.ssl.SSLContext;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -62,13 +63,14 @@ public class ProxyServer {
     private final Server server;
     private final List<Handler> handlers = Lists.newArrayList();
     private final WebSocketProxyConfiguration conf;
-    private final ExecutorService executorService;
+    private final ThreadPoolExecutor executorService;
 
-    public ProxyServer(WebSocketProxyConfiguration config)
-            throws PulsarClientException, MalformedURLException, PulsarServerException {
+    public ProxyServer(WebSocketProxyConfiguration config) throws PulsarServerException {
         this.conf = config;
-        executorService = Executors.newFixedThreadPool(WebSocketProxyConfiguration.PROXY_SERVER_EXECUTOR_THREADS,
-                new DefaultThreadFactory("pulsar-websocket-web"));
+        executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+            WebSocketProxyConfiguration.PROXY_SERVER_EXECUTOR_THREADS,
+            new DefaultThreadFactory("pulsar-websocket-web")
+        );
         this.server = new Server(new ExecutorThreadPool(executorService));
         List<ServerConnector> connectors = new ArrayList<>();
 

@@ -26,6 +26,7 @@ import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import javax.net.ssl.SSLContext;
 import javax.servlet.Servlet;
 
@@ -56,12 +57,14 @@ import io.netty.util.concurrent.DefaultThreadFactory;
  */
 public class ServerManager {
     private final Server server;
-    private final ExecutorService webServiceExecutor;
+    private final ThreadPoolExecutor webServiceExecutor;
     private final List<Handler> handlers = Lists.newArrayList();
     protected final int externalServicePort;
 
     public ServerManager(ServiceConfig config) {
-        this.webServiceExecutor = Executors.newFixedThreadPool(32, new DefaultThreadFactory("pulsar-external-web"));
+        this.webServiceExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+            32, new DefaultThreadFactory("pulsar-external-web")
+        );
         this.server = new Server(new ExecutorThreadPool(webServiceExecutor));
         this.externalServicePort = config.getWebServicePort();
 

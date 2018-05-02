@@ -27,6 +27,7 @@ import java.util.TimeZone;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import javax.servlet.DispatcherType;
 
 import org.apache.pulsar.broker.PulsarServerException;
@@ -75,12 +76,15 @@ public class WebService implements AutoCloseable {
     private final PulsarService pulsar;
     private final Server server;
     private final List<Handler> handlers;
-    private final ExecutorService webServiceExecutor;
+    private final ThreadPoolExecutor webServiceExecutor;
 
     public WebService(PulsarService pulsar) throws PulsarServerException {
         this.handlers = Lists.newArrayList();
         this.pulsar = pulsar;
-        this.webServiceExecutor = Executors.newFixedThreadPool(WebService.NUM_ACCEPTORS, new DefaultThreadFactory("pulsar-web"));
+        this.webServiceExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(
+            WebService.NUM_ACCEPTORS,
+            new DefaultThreadFactory("pulsar-web")
+        );
         this.server = new Server(new ExecutorThreadPool(webServiceExecutor));
         List<ServerConnector> connectors = new ArrayList<>();
 
